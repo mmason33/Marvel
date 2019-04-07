@@ -5,18 +5,17 @@ import { Button } from '../Button/Button'
 import Description from '../Description/Description'
 import { Title } from '../Title/Title'
 import Counter from '../Counter/Counter'
-import { keyGen } from '../../utils/keygen'
 
 export default class VotingCard extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             votes: 0,
         }
     }
 
     componentDidMount() {
-        this.props.database.ref(`contests/${this.props.id}/characters/${this.props.identifier}/votes`).once('value').then((snapshot) => {
+        this.props.database.ref(`contests/${this.props.id}/characters/${this.props.identifier}/votes`).on('value', (snapshot) => {
             this.setState((state, props) => ({
                 votes: snapshot.val() || 0
             }))
@@ -24,7 +23,7 @@ export default class VotingCard extends Component {
     }
 
     onVoteButtonClick() {
-        if (this.checkLocalStorage()) {
+        if (this.checkLocalStorage() === this.props.id) {
             console.log('you already voted')
             return false
         }
@@ -34,16 +33,19 @@ export default class VotingCard extends Component {
         })
 
         this.setLocalStorage()
-        this.sendVote();
+        this.sendVote()
     }
 
-    checkLocalStorage() {
-        return window.localStorage.getItem('vote');
+    checkLocalStorage(contenstId) {
+        const storage = JSON.parse(window.localStorage.getItem('vote'))
+        return storage ?
+            storage.contest :
+            null
     }
 
     setLocalStorage() {
         const storage = {
-            user: keyGen(20),
+            contest: this.props.id,
             character: this.props.identifier
         }
 
@@ -56,11 +58,14 @@ export default class VotingCard extends Component {
 
     render() {
         return (
-            <div className="voting-card">
+            <div className={`voting-card ${this.props.className}`}>
                 <Title text={this.props.characterName} className="voting-card-title" />
+                <div className="voting-card-image-wrapper">
+                    <span className="vertical-helper"></span>
+                    <Image imageSrc={this.props.characterThumbnail} className="voting-card-image" onClick={this.onVoteButtonClick.bind(this)} altText={this.props.characterName} />
+                    <Counter className="voting-card-counter" count={this.state.votes} />
+                </div>
                 <Description text={this.props.characterDescription} className="voting-card-description"/>
-                <Image imageSrc={this.props.characterThumbnail} className="voting-card-image" onClick={this.onVoteButtonClick.bind(this)} />
-                <Counter className="voting-card-counter" count={this.state.votes} />
                 {/* <Button buttonClassName="voting-card-button" clickHandler={this.onVoteButtonClick.bind(this)} buttonText="Vote"/> */}
             </div>
         )

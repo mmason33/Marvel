@@ -7,7 +7,7 @@ export class Image extends Component {
 
     render() {
         return (
-            <img src={ this.props.imageSrc } className={ `${this.props.className || ''} image` } onClick={this.props.onClick}/>
+            <img src={ this.props.imageSrc } className={ `${this.props.className || ''} image` } onClick={this.props.onClick} alt={this.props.altText} />
         )
     }
 }

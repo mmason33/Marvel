@@ -1,3 +1,10 @@
+// Globals
+/* --------------------------------------------------------- */
+@import './src/client/utils/scss/variables.scss';
+@import './src/client/utils/scss/mixins.scss';
+@import './src/client/utils/scss/reset.scss';
+@import './src/client/utils/scss/globals.scss';
+
 // Components
 /* --------------------------------------------------------- */
 @import './src/client/components/App/App.scss';

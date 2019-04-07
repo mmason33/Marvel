@@ -1,7 +1,5 @@
 import app from 'firebase/app'
 import 'firebase/database'
-// import FirebaseContext from './context.js'
-// import { keyGen } from '../../utils/keygen';
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -15,34 +13,3 @@ const config = {
 app.initializeApp(config);
 export const database = app.database();
 export const contestsRef = database.ref('contests')
-
-// class Firebase {
-//     constructor() {
-//       app.initializeApp(config)
-//       this.db = app.database()
-//     }
-
-//     createContest(key) {
-//       this.db.ref('contests/' + key).set({
-//         id: key,
-//         connections: 0,
-//         url: `/${key}`
-//       });
-//     }
-
-//     doesContestExist(urlPath) {
-//       const key = urlPath.replace('/', '')
-//       this.db.ref('contests/' + key).once('value').then((snapshot) => {
-//         return snapshot.exists()
-//       })
-//     }
-
-//     getContestData(key) {
-//       console.log(key);
-//       this.db.ref('contests/' + key).once('value').then((snapshot) => {
-//         console.log(snapshot.key)
-//       })
-//     }
-// }
-
-  // export default Firebase

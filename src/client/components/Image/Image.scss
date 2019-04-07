@@ -1,2 +1,23 @@
 .image {
-    max-width: 100%;}
+    max-width: 100%;
+
+    &.voting-card-image {
+        max-height: 250px;
+        max-width: 300px;
+        vertical-align: middle;
+
+        @include viewport(mobile) {
+            max-width: 80%;
+            // height: 200px;
+        }
+
+        @include viewport(tablet) {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        @include viewport(desktop-small) {
+            max-width: 250px;
+        }
+    }
+}

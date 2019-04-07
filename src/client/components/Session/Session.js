@@ -1,67 +1,64 @@
 import React, { Component } from 'react';
 
 import VotingWall from '../VotingWall/VotingWall'
-import { keyGen } from '../../utils/keygen';
+import { keyGen } from '../../utils/js/keygen';
 import { database } from '../Firebase/Firebase.js'
 import Container from '../Container/Container'
-import Url from '../../utils/url'
-import { fetchAsync } from '../../utils/fetchAsync'
+import { fetchAsync } from '../../utils/js/fetchAsync'
 
 export default class Session extends Component {
     constructor() {
         super()
         this.state = {}
+        this.url = window.location.pathname
     }
 
     componentDidMount() {
-        this.resolveUrl()
+        (this.url === '/') ?
+            this.createContest() :
+            this.retrieveContest()
     }
 
-    resolveUrl() {
-        const url = window.location.pathname
-        if (url === '/') {
-            const key = keyGen(10);
-            console.log('new key', key)
-            database.ref(`contests/${key}`).set({
-                id: key,
-                url: `/${key}`,
-                connections: 0
-            })
+    createContest() {
+        const key = keyGen(10);
+        console.log('new key', key)
 
-            fetchAsync('http://localhost:5000/api/characters/random/3')
-                .then(result => {
-                    this.setState((state) => ({
-                        id: key,
-                        url: `/${key}`,
-                        connections: 0,
-                        characters: result
-                    }))
+        fetchAsync('http://localhost:5000/api/characters/random/3')
+            .then(result => {
+                this.setState((state) => ({
+                    id: key,
+                    url: `/${key}`,
+                    characters: result
+                }))
 
-                    database.ref(`contests/${key}`).set({
-                        id: key,
-                        url: `/${key}`,
-                        connections: 0,
-                        characters: result
-                    })
+                database.ref(`contests/${key}`).set({
+                    id: key,
+                    url: `/${key}`,
+                    characters: result
                 })
-                .catch(reason => console.log(reason.message))
-        } else {
-            database.ref(`contests/${url.replace('/', '')}`).once('value').then((snapshot) => {
-                if (snapshot.exists()) {
-                    this.setState((state, props) => ({
-                        id: snapshot.val().id,
-                        url: snapshot.val().url,
-                        connections: snapshot.val().connections,
-                        characters: snapshot.val().characters
-                    }))
-                }
-            });
-        }
+            })
+            .catch(reason => console.log(reason.message))
+    }
+
+    retrieveContest() {
+        database.ref(`contests/${this.url.replace('/', '')}`).once('value').then((snapshot) => {
+            if (snapshot.exists()) {
+                this.setState((state, props) => ({
+                    id: snapshot.val().id,
+                    url: snapshot.val().url,
+                    characters: snapshot.val().characters
+                }))
+            } else {
+                this.createContest()
+            }
+        });
     }
 
     render() {
         return (
-            <VotingWall id={this.state.id} url={this.state.url} connections={this.state.connections} characters={this.state.characters} database={database}/>
+            <Container rootClass="container">
+                <VotingWall id={this.state.id} url={this.state.url} characters={this.state.characters} database={database}/>
+            </Container>
         )
     }
 }

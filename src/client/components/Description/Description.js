@@ -26,10 +26,8 @@ export default class Description extends Component {
         let description;
         let trigger
 
-        if (this.props.text) {
-            description = <p className={`text ${showHideClass}`} ref={this.descriptRef}>{this.props.text}</p>
-            trigger = <span className="trigger" onClick={this.showHideText.bind(this)}>Description</span>
-        }
+        description = <p className={`text ${showHideClass}`} ref={this.descriptRef}>{this.props.text}</p>
+        trigger = <span className="trigger" onClick={this.showHideText.bind(this)}>{this.props.text && 'Description'}</span>
 
         return (
             <div className={ `${this.props.className || ''} description` }>

@@ -15,6 +15,7 @@ export default class ShareUrl extends Component {
     render() {
         return (
             <div className={ `${this.props.className || ''} share-url`}>
+                <span className="message">Click to copy url to clipboard</span>
                 <input className={ `${this.props.inputClassName || ''} input`} value={this.props.value} onFocus={this.onFocus} readOnly={true}/>
             </div>
         )

@@ -1,0 +1,25 @@
+.voting-wall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+
+    .logo-wrapper {
+        background-color: $color-red;
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .voting-wall-logo {
+        height: 80px;
+    }
+
+    .voting-wall-title {
+        background-color: $color-red;
+        color: $color-white;
+        font-size: 1.5rem;
+        line-height: 27px;
+        margin: 0;
+    }
+}

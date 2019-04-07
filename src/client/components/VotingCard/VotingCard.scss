@@ -1,3 +1,80 @@
 .voting-card {
-    max-width: 200px;
+    width: 350px;
+    height: 500px;
+    transition: ease transform .2s;
+
+    @include viewport(mobile) {
+        width: 320px;
+        margin: 0 auto;
+        margin-bottom: 40px;
+    }
+
+    @include viewport(tablet) {
+        width: 200px;
+        height: 400px;
+        margin: 0 10px;
+    }
+
+    @include viewport(desktop-small) {
+        width: 250px;
+        height: 500px;
+        margin: 0 30px;
+    }
+
+    .voting-card-title {
+
+        @include viewport(tablet) {
+            margin: 10px 0;
+            font-size: 1.2  rem;
+        }
+    }
+
+    &.blue {
+        background-color: $color-blue;
+    }
+
+    &.red {
+        background-color: $color-red;
+    }
+
+    &.yellow {
+        background-color: $color-yellow;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .voting-card-image-wrapper {
+        width: 350px;
+        height: 250px;
+        margin-bottom: 40px;
+        text-align: center;
+
+        @include viewport(mobile) {
+            width: 320px;
+            height: 200px;
+        }
+
+        @include viewport(tablet) {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        @include viewport(desktop-small) {
+            width: 250px;
+            height: 250px;
+        }
+
+        .vertical-helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }

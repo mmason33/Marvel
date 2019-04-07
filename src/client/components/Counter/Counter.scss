@@ -1,0 +1,14 @@
+.counter {
+    background-color: $color-black;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 30px;
+    position: relative;
+    color: $color-white;
+
+    &:before {
+        content: 'VOTES: ';
+        color: $color-white;
+        font-size: .8rem;
+    }
+}
