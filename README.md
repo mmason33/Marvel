@@ -21,13 +21,20 @@ npm install
 ```
 
 
-After all the packages have been installed, run `npm start` to run the React front end on `http://localhost:3000`. Once that is running open another terminal window, change the working directory to `marvel` and run `node server.js`. You should see success messages from both commands.
+After all the packages have been installed, run `npm start` to run the React front end on `http://localhost:3000`. Once that is running open another terminal window, change the working directory to `Marvel` and run `node server.js`. You should see success messages from both commands.
 
 Once the React and Express are running, you can visit the project at `http://localhost:3000`.
 
 Example of a contest in progress:
 ```
 http://localhost:3000/STgyQp2djE
+```
+
+Example of the Express endpoint used to wrap a GraphQL endpoint:
+```
+Express route: http://localhost:5000/api/characters/3
+Third Party API: https://staging.api.marvelql.com
+
 ```
 
 Things to note:
@@ -41,3 +48,5 @@ Things to note:
 7. Each contest has a unique url that correspondings to a data structure.
 8. The url's are shareable and can visited as long as the data exists.
 9. If the url visited is not the root and does not match a database key then a new contest/url will be created.
+10. Express was used to obfuscate the api origin.
+11. The Express api wrapper is at `http://localhost:5000/api/characters/3` with the last part of the url being a request variables (`req.params`).
