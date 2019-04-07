@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 
+/**
+ * @class Description
+ * @prop {string} className - Css class
+ * @prop {string} text - Description content
+ */
 export default class Description extends Component {
     constructor(props) {
         super(props)
@@ -9,6 +14,10 @@ export default class Description extends Component {
         }
     }
 
+    /**
+     * @method showHideText - Toggle the description viewing
+     * @returns void
+     */
     showHideText() {
         const description = this.descriptRef.current.classList
 

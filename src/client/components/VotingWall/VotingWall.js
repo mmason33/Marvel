@@ -5,9 +5,18 @@ import ShareUrl from '../ShareUrl/ShareUrl'
 import { Title } from '../Title/Title'
 import { Image } from '../Image/Image'
 
+/**
+ * @class VotingWall
+ * @prop {string} id - Contest hash
+ * @prop {string} url - Contest url
+ * @prop {object} characters - Contest characters
+ * @prop {object} database - Firebase
+ */
 export default class VotingWall extends Component {
 
     componentDidUpdate() {
+        // Prevent unnecessary re-renders
+        // State is dependent on the GraphQL response
         if (!this.state) {
             this.setState((state, props) => ({
                 id: this.props.id,
@@ -15,6 +24,7 @@ export default class VotingWall extends Component {
                 characters: this.props.characters,
             }))
 
+            // Update url with the unique contest hash
             window.history.pushState(null,"", `${window.location.origin}/${this.props.id}`);
         }
     }

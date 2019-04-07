@@ -1,3 +1,7 @@
+/**
+ * GraphQL Queries
+ */
+
 module.exports = {
 
     getOffset: (offset) => {

@@ -1,3 +1,9 @@
+/**
+ * @function keyGen - Generate unique key
+ * @param {int} length - The desired length of the key
+ *
+ * @returns {string} key
+ */
 export const keyGen = (length) => {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     let key = '';

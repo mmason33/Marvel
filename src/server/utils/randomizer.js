@@ -1,3 +1,11 @@
+/**
+ * @function randomizer - Generate a given amount of random numbers within a range, verifies that there is no duplicates
+ * @param {int} limit - The maximun range
+ * @param {int} quanity - Amount of random numbers desired
+ *
+ * @returns {array} integersList
+ */
+
 module.exports = (limit, quanity) => {
     const integersList = [];
     let current;

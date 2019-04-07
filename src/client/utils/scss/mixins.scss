@@ -1,3 +1,5 @@
+/* MIXINS */
+
 @mixin viewport($media) {
     @if $media == mobile {
         // max-width: 767px

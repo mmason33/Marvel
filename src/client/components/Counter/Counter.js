@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
+/**
+ * @class Counter
+ * @prop {string} className - Additional css class
+ * @prop {int} count - The current value of the counter
+ */
 export default class Counter extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div className={ `${this.props.className || ''} counter`}>
