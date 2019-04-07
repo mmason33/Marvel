@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 
 import { Image } from '../Image/Image'
 import { Button } from '../Button/Button'
+import Description from '../Description/Description'
+import { Title } from '../Title/Title'
+import Counter from '../Counter/Counter'
+import { keyGen } from '../../utils/keygen'
 
 export default class VotingCard extends Component {
     constructor() {
@@ -12,12 +16,7 @@ export default class VotingCard extends Component {
     }
 
     componentDidMount() {
-        this.queryVotes();
-    }
-
-    queryVotes() {
         this.props.database.ref(`contests/${this.props.id}/characters/${this.props.identifier}/votes`).once('value').then((snapshot) => {
-            console.log(snapshot.val())
             this.setState((state, props) => ({
                 votes: snapshot.val() || 0
             }))
@@ -25,23 +24,44 @@ export default class VotingCard extends Component {
     }
 
     onVoteButtonClick() {
-        console.log('you voted!')
+        if (this.checkLocalStorage()) {
+            console.log('you already voted')
+            return false
+        }
+
         this.setState({
             votes: this.state.votes += 1,
         })
 
-        console.log(this.props.identifier)
+        this.setLocalStorage()
+        this.sendVote();
+    }
 
+    checkLocalStorage() {
+        return window.localStorage.getItem('vote');
+    }
+
+    setLocalStorage() {
+        const storage = {
+            user: keyGen(20),
+            character: this.props.identifier
+        }
+
+        window.localStorage.setItem('vote', JSON.stringify(storage))
+    }
+
+    sendVote() {
         this.props.database.ref(`contests/${this.props.id}/characters/${this.props.identifier}`).update({votes: this.state.votes})
     }
 
     render() {
         return (
             <div className="voting-card">
-                <h1>{this.props.characterName}</h1>
-                <p>{this.props.characterDescription}</p>
-                <Image imageSrc={this.props.characterThumbnail} imageClassName="voting-card-image" />
-                <Button buttonClassName="voting-card-button" clickHandler={this.onVoteButtonClick.bind(this)} buttonText={this.state.votes}/>
+                <Title text={this.props.characterName} className="voting-card-title" />
+                <Description text={this.props.characterDescription} className="voting-card-description"/>
+                <Image imageSrc={this.props.characterThumbnail} className="voting-card-image" onClick={this.onVoteButtonClick.bind(this)} />
+                <Counter className="voting-card-counter" count={this.state.votes} />
+                {/* <Button buttonClassName="voting-card-button" clickHandler={this.onVoteButtonClick.bind(this)} buttonText="Vote"/> */}
             </div>
         )
     }

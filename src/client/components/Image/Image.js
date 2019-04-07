@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export const Image = ({ imageSrc, imageClassName }) => {
-    return (
-        <img src={ imageSrc } className={ `${imageClassName || ''} image` } />
-    )
+export class Image extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        return (
+            <img src={ this.props.imageSrc } className={ `${this.props.className || ''} image` } onClick={this.props.onClick}/>
+        )
+    }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 import VotingCard from '../VotingCard/VotingCard'
+import ShareUrl from '../ShareUrl/ShareUrl'
+import { Title } from '../Title/Title'
 
 export default class VotingWall extends Component {
     constructor(props) {
@@ -11,16 +13,20 @@ export default class VotingWall extends Component {
         if (!this.state) {
             this.setState((state, props) => ({
                 id: this.props.id,
-                url: this.props.url,
+                url: window.location.origin + this.props.url,
                 connections: this.props.connections,
                 characters: this.props.characters,
             }))
+
+            window.history.pushState(null,"", `${window.location.origin}/${this.props.id}`);
         }
     }
 
     render() {
         let cards;
-        console.log(this.state);
+        let title;
+        let share;
+
         if (this.state) {
             cards = Object.keys(this.state.characters).map((character, index) => {
             let data = this.state.characters[character][0]
@@ -35,11 +41,17 @@ export default class VotingWall extends Component {
                     characterResourceUri={data['resourceURI']}
                     database={this.props.database}
                     />
-        })
+            })
+
+            title = <Title text="Marvel Character Voting" className="voting-wall-title" />
+            share = <ShareUrl className="voting-share-url" inputClassName="voting-input" value={this.state.url} />
+
         }
 
         return (
-            <div>
+            <div className="voting-wall">
+                {title}
+                {share}
                 {cards}
             </div>
         )

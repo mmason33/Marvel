@@ -1,10 +1,12 @@
-// App
-/* --------------------------------------------------------- */
-@import './src/client/components/App/App.scss';
-
 // Components
 /* --------------------------------------------------------- */
+@import './src/client/components/App/App.scss';
+@import './src/client/components/Button/Button.scss';
+@import './src/client/components/Container/Container.scss';
+@import './src/client/components/Counter/Counter.scss';
+@import './src/client/components/Description/Description.scss';
+@import './src/client/components/Image/Image.scss';
+@import './src/client/components/ShareUrl/ShareUrl.scss';
+@import './src/client/components/Title/Title.scss';
 @import './src/client/components/VotingCard/VotingCard.scss';
 @import './src/client/components/VotingWall/VotingWall.scss';
-@import './src/client/components/Image/Image.scss';
-@import './src/client/components/Button/Button.scss';

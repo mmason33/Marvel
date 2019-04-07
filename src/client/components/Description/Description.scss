@@ -1,0 +1,21 @@
+.description {
+
+    .text {
+        transition: ease all .2s;
+
+        &.hide {
+            position: absolute;
+            height: 0;
+            opacity: 0;
+        }
+
+        &.show {
+            position: relative;
+            opacity: 1;
+        }
+    }
+
+    .trigger {
+        cursor: pointer;
+    }
+}

@@ -1,5 +1,4 @@
-export const keyGen = () => {
-    const length = 10;
+export const keyGen = (length) => {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     let key = '';
 

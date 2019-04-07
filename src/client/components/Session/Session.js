@@ -20,7 +20,7 @@ export default class Session extends Component {
     resolveUrl() {
         const url = window.location.pathname
         if (url === '/') {
-            const key = keyGen();
+            const key = keyGen(10);
             console.log('new key', key)
             database.ref(`contests/${key}`).set({
                 id: key,
