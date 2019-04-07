@@ -1,5 +1,6 @@
 const express = require('express');
 const { createApolloFetch } = require('apollo-fetch');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -7,6 +8,8 @@ const config = require('./src/server/config/config');
 const randomizer = require('./src/server/utils/randomizer');
 const queries = require('./src/server/config/queries');
 
+app.use(cors());
+app.options('*', cors());
 
 app.get('/api/characters/:offset', (req, res) => {
     const fetch = createApolloFetch({

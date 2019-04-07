@@ -1,6 +1,6 @@
 import app from 'firebase/app'
 import 'firebase/database'
-import FirebaseContext from './context.js'
+// import FirebaseContext from './context.js'
 // import { keyGen } from '../../utils/keygen';
 
 const config = {
@@ -12,35 +12,37 @@ const config = {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-class Firebase {
-    constructor() {
-      app.initializeApp(config)
-      this.db = app.database()
-    }
+app.initializeApp(config);
+export const database = app.database();
+export const contestsRef = database.ref('contests')
 
-    createContest(key) {
-      this.db.ref('contests/' + key).set({
-        id: key,
-        connections: 0,
-        url: `/${key}`
-      });
-    }
+// class Firebase {
+//     constructor() {
+//       app.initializeApp(config)
+//       this.db = app.database()
+//     }
 
-    doesContestExist(urlPath) {
-      const key = urlPath.replace('/', '')
-      this.db.ref('contests/' + key).once('value').then((snapshot) => {
-        return snapshot.exists()
-      })
-    }
+//     createContest(key) {
+//       this.db.ref('contests/' + key).set({
+//         id: key,
+//         connections: 0,
+//         url: `/${key}`
+//       });
+//     }
 
-    getContestData(key) {
-      console.log(key);
-      this.db.ref('contests/' + key).once('value').then((snapshot) => {
-        console.log(snapshot.key)
-      })
-    }
-}
+//     doesContestExist(urlPath) {
+//       const key = urlPath.replace('/', '')
+//       this.db.ref('contests/' + key).once('value').then((snapshot) => {
+//         return snapshot.exists()
+//       })
+//     }
 
-  export default Firebase
+//     getContestData(key) {
+//       console.log(key);
+//       this.db.ref('contests/' + key).once('value').then((snapshot) => {
+//         console.log(snapshot.key)
+//       })
+//     }
+// }
 
-  export { FirebaseContext }
+  // export default Firebase

@@ -1,0 +1,1 @@
+export const ServerOrigin = 'http:localhost:5000';
