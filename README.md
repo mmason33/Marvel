@@ -38,6 +38,8 @@ Third Party API: https://staging.api.marvelql.com
 ```
 
 Things to note:
+`It was said that this project should only take about 8 hours so please keep that in mind(Although I spent a little more time than that on it).`
+`I did not use Redux because of my limited experience with it. Given the time frame I thought it was best to leave it out. In my opinion this application does not have an unmanagable amount of state.`
 
 1. Click on the character image to vote for that character.
 2. YOU CAN ONLY VOTE ONCE.
